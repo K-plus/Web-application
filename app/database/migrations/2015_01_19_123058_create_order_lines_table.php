@@ -16,15 +16,15 @@ class CreateOrderLinesTable extends Migration {
 		{
 			$table->increments('id');
 			
-			$table->integer('order_id')->unsigned();
-			$table->foreign('order_id')->references('id')->on('orders');
+			 $table->integer('order_id')->unsigned()->index();
+			 $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
 
-			$table->integer('product_id')->unsigned();
-			$table->foreign('product_id')->references('id')->on('products');
+			 $table->integer('product_id')->unsigned()->index();
+			 $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
 			$table->integer('amount');
-			$table->decimal('unit_price', 5, 2);
-			$table->decimal('subtotal', 5, 2);
+			$table->integer('unit_price');
+			$table->integer('subtotal');
 			
 			$table->timestamps();
 		});

@@ -16,10 +16,10 @@ class CreateOrdersTable extends Migration {
 		{
 			$table->increments('id');
 			
-			$table->integer('user_id')->unsigned();
-			$table->foreign('user_id')->references('id')->on('users');
+			 $table->integer('user_id')->unsigned()->index();
+			 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-			$table->decimal('total_price', 5, 2);
+			$table->integer('total_price');
 
 			$table->boolean('paid');
 

@@ -2,6 +2,14 @@
 
 class DatabaseSeeder extends Seeder {
 
+    private $tables = [
+        'orders',
+        'order_lines',
+        'shop_product_stock',
+        'shops',
+        'users'
+    ];
+
 	/**
 	 * Run the database seeds.
 	 *
@@ -9,9 +17,26 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		Eloquent::unguard();
+        $this->cleanDatabase();
 
-		// $this->call('UserTableSeeder');
+        Eloquent::unguard();
+
+		$this->call('UsersTableSeeder');
+		$this->call('ProductsTableSeeder');
+		$this->call('ShopsTableSeeder');
+		$this->call('ShopProductStockTableSeeder');
 	}
+
+    private function cleanDatabase()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        foreach($this->tables as $tableName)
+        {
+            DB::table($tableName)->truncate();
+        }
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+    }
 
 }

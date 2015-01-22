@@ -81,6 +81,16 @@ class ApiController extends \BaseController {
             'message' => $message
         ]);
     }
+    /**
+     * @param $message
+     * @return mixed
+     */
+    public function respondOk($message)
+    {
+        return $this->setStatusCode(200)->respond([
+            'message' => $message
+        ]);
+    }
 
     public function respondValidationError($message)
     {

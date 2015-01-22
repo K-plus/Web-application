@@ -3,9 +3,12 @@
 // , 'before' => 'auth.basic'
 Route::group(['prefix' => 'api/v1'], function()
 {
-
-
     Route::get('cart', 'CartApiController@index');
+    Route::post('cart/product/add', 'CartApiController@addProduct');
+    Route::post('cart/product/update', 'CartApiController@updateProduct');
+    Route::post('cart/product/delete', 'CartApiController@deleteProduct');
+
+
 
     // POST /customer/login (email, password)
 

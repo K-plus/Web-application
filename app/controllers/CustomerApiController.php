@@ -7,9 +7,19 @@ class CustomerApiController extends ApiController {
         $email = Input::get('email');
         $password = Input::get('password');
 
-        if (Auth::validate(array('email' => $email, 'password' => $password)))
+        if (Auth::attempt(array('email' => $email, 'password' => $password)))
         {
-            return $this->respondOk('Login ok.');
+            $user = Auth::user();
+
+            $userData = [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email
+            ];
+
+            return $this->respond([
+                'data' => $userData
+            ]);
         }
         else
         {

@@ -5,9 +5,10 @@ class DatabaseSeeder extends Seeder {
     private $tables = [
         'orders',
         'order_lines',
-        'shop_product_stock',
-        'shops',
-        'users'
+        'users',
+        'products',
+        'carts',
+        'cart_lines'
     ];
 
 	/**
@@ -23,8 +24,6 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('UsersTableSeeder');
 		$this->call('ProductsTableSeeder');
-		$this->call('ShopsTableSeeder');
-		$this->call('ShopProductStockTableSeeder');
 	}
 
     private function cleanDatabase()

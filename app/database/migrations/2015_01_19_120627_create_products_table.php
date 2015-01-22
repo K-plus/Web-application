@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration {
 			$table->string('name');
 			$table->integer('price');
 			$table->bigInteger('ean')->unique();
+            $table->integer('stock');
 			$table->timestamps();
 		});
 	}

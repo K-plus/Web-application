@@ -16,6 +16,7 @@ class ProductsTableSeeder extends Seeder {
 				'name' => substr($name, 0, strlen($name) - 1),
 				'price' => $faker->randomNumber(4),
 				'ean' => $faker->ean13,
+				'stock' => $faker->randomNumber(2),
 			]);
 		}
 	}

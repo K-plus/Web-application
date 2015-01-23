@@ -1,6 +1,8 @@
-<?php
+<?php namespace Kplus\Front\Controllers;
 
-class HomeController extends BaseController {
+use View;
+
+class HomeController extends \BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -15,7 +17,7 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	public function getIndex()
 	{
 		return View::make('hello');
 	}

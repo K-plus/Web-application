@@ -13,13 +13,13 @@ class CartsTableSeeder extends Seeder {
         CartLine::create([
             'cart_id' => 1,
             'product_id' => 1,
-            'amount' => 3
+            'qty' => 3
         ]);
 
         CartLine::create([
             'cart_id' => 1,
             'product_id' => 2,
-            'amount' => 1
+            'qty' => 1
         ]);
 
 

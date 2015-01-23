@@ -1,4 +1,7 @@
-<?php
+<?php namespace Kplus\Api\Controllers;
+
+use Auth;
+use Kplus\Models\CartLine;
 
 class CartApiController extends ApiController {
 

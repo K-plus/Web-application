@@ -1,4 +1,5 @@
-<?php
+<?php namespace Kplus\Models;
+
 
 class Cart extends \Eloquent {
 
@@ -7,12 +8,12 @@ class Cart extends \Eloquent {
 
     public function user()
     {
-        return $this->belongsTo('User');
+        return $this->belongsTo('Kplus\Models\User');
     }
 
     public function cartLines()
     {
-        return $this->hasMany('CartLine');
+        return $this->hasMany('Kplus\Models\CartLine');
     }
 
 }

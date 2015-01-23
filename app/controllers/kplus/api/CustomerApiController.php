@@ -1,4 +1,6 @@
-<?php
+<?php namespace Kplus\Api\Controllers;
+
+use Auth;
 
 class CustomerApiController extends ApiController {
 

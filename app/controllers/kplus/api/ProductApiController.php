@@ -1,4 +1,6 @@
-<?php
+<?php namespace Kplus\Api\Controllers;
+
+use Kplus\Models\Product;
 
 class ProductApiController extends ApiController {
 

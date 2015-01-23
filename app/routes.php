@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'api/v1'], function()
+Route::group(array('prefix' => 'api/v1', 'namespace' => 'Kplus\Api\Controllers'), function()
 {
     Route::post('customer/login', 'CustomerApiController@login');
 
@@ -13,4 +13,13 @@ Route::group(['prefix' => 'api/v1'], function()
 
         Route::get('product/{id}', 'ProductApiController@show');
     });
+});
+
+Route::group(array('namespace' => 'Kplus\Front\Controllers'), function(){
+	
+	Route::get('/login', 'LoginController@getIndex');
+
+	Route::group(array('before' => 'auth'), function(){
+		Route::get('/', 'HomeController@getIndex');
+	});
 });

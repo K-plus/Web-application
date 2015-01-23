@@ -1,11 +1,11 @@
-<?php
+<?php namespace Kplus\Models;
 
 use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class User extends \Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 
@@ -25,7 +25,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     public function cart()
     {
-        return $this->hasOne('Cart');
+        return $this->hasOne('Kplus\Models\Cart');
     }
 
 }

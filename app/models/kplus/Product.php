@@ -1,4 +1,4 @@
-<?php
+<?php namespace Kplus\Models;
 
 /**
  * Class Product

@@ -1,4 +1,4 @@
-<?php
+<?php namespace Kplus\Models;
 
 class CartLine extends \Eloquent {
 
@@ -7,12 +7,12 @@ class CartLine extends \Eloquent {
 
     public function cart()
     {
-        return $this->belongsTo('Cart');
+        return $this->belongsTo('Kplus\Models\Cart');
     }
 
     public function product()
     {
-        return $this->belongsTo('Product');
+        return $this->belongsTo('Kplus\Models\Product');
     }
 
 }

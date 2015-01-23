@@ -22,7 +22,7 @@ class CreateOrderLinesTable extends Migration {
 			 $table->integer('product_id')->unsigned()->index();
 			 $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
-			$table->integer('amount');
+			$table->integer('qty');
 			$table->integer('unit_price');
 			$table->integer('subtotal');
 			

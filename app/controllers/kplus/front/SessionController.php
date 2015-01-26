@@ -56,7 +56,6 @@ class SessionController extends \BaseController
             }
         
         } catch ( ValidationException $e ) {
-        	va_dump('hier?'); die();
             return Redirect::route( 'login' )->withInput(Input::only('email'))->withErrors( $e->get_errors() );
         }
 	}

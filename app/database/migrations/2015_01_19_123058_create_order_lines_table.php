@@ -19,8 +19,10 @@ class CreateOrderLinesTable extends Migration {
 			 $table->integer('order_id')->unsigned()->index();
 			 $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
 
-			 $table->integer('product_id')->unsigned()->index();
-			 $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+             $table->string('ean');
+			 $table->string('product_name');
+//            ->unsigned()->index();
+//			 $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
 			$table->integer('qty');
 			$table->integer('unit_price');

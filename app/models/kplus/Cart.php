@@ -1,6 +1,5 @@
 <?php namespace Kplus\Models;
 
-
 class Cart extends \Eloquent {
 
     protected $table = 'carts';

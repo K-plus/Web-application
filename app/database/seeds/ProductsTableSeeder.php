@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Factory as Faker;
+use Kplus\Models\Product;
 
 class ProductsTableSeeder extends Seeder {
 

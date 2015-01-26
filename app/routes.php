@@ -12,6 +12,8 @@ Route::group(array('prefix' => 'api/v1', 'namespace' => 'Kplus\Api\Controllers')
         Route::post('cart/product/delete', 'CartApiController@deleteProduct');
 
         Route::get('product/{id}', 'ProductApiController@show');
+
+        Route::post('order/add', 'OrderApiController@createOrder');
     });
 });
 

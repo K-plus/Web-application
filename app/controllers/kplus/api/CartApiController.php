@@ -1,6 +1,6 @@
 <?php namespace Kplus\Api\Controllers;
 
-use Auth;
+use Auth, Input;
 use Kplus\Models\CartLine;
 
 class CartApiController extends ApiController {
@@ -17,6 +17,7 @@ class CartApiController extends ApiController {
         foreach($cartLines as $c => $cartLine){
             $lines[$c]['id'] = $cartLine->id;
             $lines[$c]['qty'] = $cartLine->qty;
+            $lines[$c]['sub_total'] = ($cartLine->qty * $cartLine->product->price);
             $lines[$c]['product'] = [
                 'id' => $cartLine->product->id,
                 'name' => $cartLine->product->name,
@@ -25,7 +26,7 @@ class CartApiController extends ApiController {
             ];
 
             $totalItems += $cartLine->qty;
-            $totalPrice += ($cartLine->qty * $cartLine->product->price);
+            $totalPrice += $lines[$c]['sub_total'];
         }
 
         return $this->respond([
@@ -62,7 +63,7 @@ class CartApiController extends ApiController {
             }
             else
             {
-                $cartLine->qty = $cartLine->qt + $qty;
+                $cartLine->qty = $cartLine->qty + $qty;
                 $cartLine->save();
             }
 

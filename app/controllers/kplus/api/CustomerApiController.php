@@ -1,5 +1,7 @@
 <?php namespace Kplus\Api\Controllers;
 
+use Auth, Input;
+
 class CustomerApiController extends ApiController {
 
 	public function login()

@@ -10,7 +10,12 @@
 	"require-dev": {
 		"way/generators": "~2.0",
 		"fzaninotto/faker": "~1.4",
-        "phpunit/phpunit": "4.4.0"
+        "phpunit/phpunit": "4.4.0",
+        "twitter/bootstrap": "dev-master",
+		"rcrowe/twigbridge": "0.6.0",
+		"fortawesome/font-awesome": "4.*",
+        "components/jquery": "1.11.*",
+    	"laracasts/utilities": "1.0.*"
 	},
 	"autoload": {
 		"classmap": [
@@ -21,7 +26,10 @@
 			"app/database/seeds",
 			"app/tests/TestCase.php",
 			"app/tests/ApiTester.php"
-		]
+		],
+		"psr-4": {
+        	"Kplus\\": "app/kplus"
+    	}
 	},
 	"scripts": {
 		"post-install-cmd": [
@@ -30,7 +38,13 @@
 		],
 		"post-update-cmd": [
 			"php artisan clear-compiled",
-			"php artisan optimize"
+			"php artisan optimize",
+			"php artisan asset:publish --path=vendor/twitter/bootstrap/dist/css bootstrap/css",
+			"php artisan asset:publish --path=vendor/twitter/bootstrap/dist/js bootstrap/js",
+			"php artisan asset:publish --path=vendor/twitter/bootstrap/dist/fonts bootstrap/fonts",
+			"php artisan asset:publish --path=vendor/fortawesome/font-awesome/css/ fontawesome/css",
+			"php artisan asset:publish --path=vendor/fortawesome/font-awesome/fonts/ fontawesome/fonts",
+			"php artisan asset:publish --path=vendor/components/jquery jquery"
 		],
 		"post-create-project-cmd": [
 			"php artisan key:generate"

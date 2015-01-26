@@ -2,6 +2,14 @@
 
 return array(
 
+	'constants' => array(
+
+		// Local
+		define('VERSION', 'v0.1'),
+	    define('SITE', 'Kplus'),
+	    define('CURRENTYEAR', date('Y')),
+	),
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
@@ -52,7 +60,7 @@ return array(
 	|
 	*/
 
-	'locale' => 'en',
+	'locale' => 'nl',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -122,7 +130,10 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-		'Way\Generators\GeneratorsServiceProvider'
+		'Way\Generators\GeneratorsServiceProvider',
+		'TwigBridge\ServiceProvider',
+		'Laracasts\Utilities\UtilitiesServiceProvider',
+
 
 	),
 
@@ -190,7 +201,7 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
-
+		'Twig' 				=> 'TwigBridge\Facade\Twig',
 	),
 
 );

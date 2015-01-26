@@ -20,9 +20,22 @@ Route::group(array('prefix' => 'api/v1', 'namespace' => 'Kplus\Api\Controllers')
 
 Route::group(array('namespace' => 'Kplus\Front\Controllers'), function(){
 	
-	Route::get('/login', 'LoginController@getIndex');
+    Route::get('/logout', array('as' => 'logout', 'uses' => 'SessionController@getLogout'));
+	Route::get('/login', array('as' => 'login', 'uses' => 'SessionController@getIndex'));
+    Route::post('/authenticate', array('as' => 'authenticate', 'uses' => 'SessionController@postLogin'));
+    
+    Route::get('/', array('as' => 'home', 'uses' => 'HomeController@getIndex'));
 
-	Route::group(array('before' => 'auth'), function(){
-		Route::get('/', 'HomeController@getIndex');
+    // Need the user to log in
+    Route::group(array('before' => 'auth'), function(){
+    	Route::get('/cart', array('as' => 'cart', 'uses' => 'CartController@getIndex'));
 	});
+});
+
+View::composer('kplus/includes/MenuView.twig', function($view){
+    if(Session::has('username')) {
+        $view->with('username', Crypt::decrypt(Session::get('username')) );
+    } else {
+        $view->with('username', 'Gast');
+    }
 });

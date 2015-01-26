@@ -1,7 +1,8 @@
 <?php namespace Kplus\Api\Controllers;
 
-use Auth, Input;
-
+use Auth;
+use Input;
+    
 class CustomerApiController extends ApiController {
 
 	public function login()
@@ -25,7 +26,7 @@ class CustomerApiController extends ApiController {
         }
         else
         {
-            return $this->respondNotFound('Login credentials are invalid.');
+            return $this->respondValidationError('Login credentials are invalid.');
         }
 	}
 

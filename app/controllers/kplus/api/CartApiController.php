@@ -1,42 +1,51 @@
 <?php namespace Kplus\Api\Controllers;
 
-use Auth, Input;
+use Auth;
 use Kplus\Models\CartLine;
 
+/**
+ * CartApiController handles API requests 
+ */
 class CartApiController extends ApiController {
 
     public function index()
     {
         $cart = Auth::user()->cart;
-        $cartLines = $cart->cartLines;
 
-        $lines = [];
-        $totalItems = 0;
-        $totalPrice = 0;
+        // Check if the user has a cart
+        if( ! is_null($cart) ) {
+            $lines = [];
+            $totalItems = 0;
+            $totalPrice = 0;
 
-        foreach($cartLines as $c => $cartLine){
-            $lines[$c]['id'] = $cartLine->id;
-            $lines[$c]['qty'] = $cartLine->qty;
-            $lines[$c]['sub_total'] = ($cartLine->qty * $cartLine->product->price);
-            $lines[$c]['product'] = [
-                'id' => $cartLine->product->id,
-                'name' => $cartLine->product->name,
-                'price' => $cartLine->product->price,
-                'ean' => $cartLine->product->ean
-            ];
+            foreach($cartLines as $c => $cartLine){
+                
+                $lines[$c]['id'] = $cartLine->id;
+                $lines[$c]['qty'] = $cartLine->qty;
+                
+                $lines[$c]['product'] = [
+                    'id' => $cartLine->product->id,
+                    'name' => $cartLine->product->name,
+                    'price' => $cartLine->product->price,
+                    'ean' => $cartLine->product->ean
+                ];
 
-            $totalItems += $cartLine->qty;
-            $totalPrice += $lines[$c]['sub_total'];
+                $totalItems += $cartLine->qty;
+                $totalPrice += ($cartLine->qty * $cartLine->product->price);
+            }
+
+            return $this->respond([
+                'data' => [
+                    'cart_id' => $cart->id,
+                    'total_items' => $totalItems,
+                    'total_price' => $totalPrice,
+                    'cart_lines' => $lines
+                ]
+            ]);
         }
 
-        return $this->respond([
-            'data' => [
-                'cart_id' => $cart->id,
-                'total_items' => $totalItems,
-                'total_price' => $totalPrice,
-                'cart_lines' => $lines
-            ]
-        ]);
+        // User does not have a cart yet. 
+        return $this->respondOk('No cart present');
     }
 
     public function addProduct()
@@ -63,7 +72,7 @@ class CartApiController extends ApiController {
             }
             else
             {
-                $cartLine->qty = $cartLine->qty + $qty;
+                $cartLine->qty = $cartLine->qt + $qty;
                 $cartLine->save();
             }
 

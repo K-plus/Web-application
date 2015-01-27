@@ -14,7 +14,7 @@
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
         
-        <li class="dropdown">
+        {# <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
             <ul class="dropdown-menu message-dropdown">
                 
@@ -74,9 +74,9 @@
                 </li>
 
             </ul>
-        </li>
+        </li> #}
         
-        <li class="dropdown">
+        {# <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
             <ul class="dropdown-menu alert-dropdown">
                 <li>
@@ -102,28 +102,30 @@
                     <a href="#">View All</a>
                 </li>
             </ul>
-        </li>
+        </li> #}
         <!-- User Menu --> 
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{username }}<b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                </li>
-                <li class="divider"></li>
-                <li>
                     {% if username == 'Gast' %}
-                        <a href="{{route('login')}}"><i class="fa fa-fw fa-sign-in"></i> Inloggen</a>
+                        <li>
+                            <a href="{{route('login')}}"><i class="fa fa-fw fa-sign-in"></i> Inloggen</a>
+                        </li>
                     {% else %}
-                        <a href="{{route('logout')}}"><i class="fa fa-fw fa-power-off"></i> Uitloggen</a>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li>
+{#                         <li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        </li> #}
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                             <a href="{{route('logout')}}"><i class="fa fa-fw fa-power-off"></i> Uitloggen</a>
+                        </li>
                     {% endif %}
-                </li>
             </ul>
         </li>
     </ul>
@@ -138,15 +140,15 @@
             
             <!-- Cart --> 
             <li class="{{ Route.is('cart') ? 'active' : ''}}">
-                <a href="{{route('cart')}}"><i class="fa fa-fw fa-shopping-cart"></i> Boodschappenlijst</a>
+                <a href="{{route('cart')}}"><i class="fa fa-fw fa-check-square"></i> Boodschappenlijst</a>
             </li>
 
             <!-- Products --> 
             <li class="{{ Route.is() ? 'active' : '' }}">
-                <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
+                <a href="tables.html"><i class="fa fa-fw fa-shopping-cart"></i> Producten</a>
             </li>
 
-            <li>
+           {#  <li>
                 <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
             </li>
             
@@ -156,7 +158,7 @@
             <li>
                 <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
             </li>
-
+ #}
             {# <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#articles"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="articles" class="collapse">
@@ -171,9 +173,9 @@
 {#             <li class="{{ route.is('home') ? active : ''}}" >
                 <a href="blank-page.html"><i class="fa fa-fw fa-file"></i>Blank Page</a>
             </li> #}
-            <li>
+           {#  <li>
                 <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-            </li>
+            </li> #}
         </ul>
     </div>
 

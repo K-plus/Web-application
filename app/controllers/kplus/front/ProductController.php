@@ -1,10 +1,11 @@
 <?php namespace Kplus\Front\Controllers;
 
 use Kplus\Models\Cart;
+use Kplus\Models\Product; 
 
 use View, Auth;
 
-class CartController extends \BaseController
+class ProductController extends \BaseController
 {
 	
 	public function getIndex()

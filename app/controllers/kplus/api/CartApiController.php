@@ -17,7 +17,8 @@ class CartApiController extends ApiController {
             $lines = [];
             $totalItems = 0;
             $totalPrice = 0;
-
+            $cartLines = $cart->cartLines;
+            
             foreach($cartLines as $c => $cartLine){
                 
                 $lines[$c]['id'] = $cartLine->id;

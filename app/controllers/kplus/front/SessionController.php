@@ -42,21 +42,27 @@ class SessionController extends \BaseController
 
 	public function postLogin()
 	{
-		$input = Input::only('email', 'password');
+		$input = Input::only('e-mail', 'wachtwoord');
 
 		try {
             
             $validate_data = $this->_validator->validate( $input );
             
-            if( Auth::attempt(array('email' => $input['email'], 'password' => $input['password'])) ) {
-            	Session::put('username', Crypt::encrypt($input['email']));
+            if( Auth::attempt(array('email' => $input['e-mail'], 'password' => $input['wachtwoord'])) ) {
+            
+            	Session::put('username', Crypt::encrypt($input['e-mail']));
             	return Redirect::intended();
+            
             } else {
-            	return Redirect::route('login')->withInput(Input::only('email'))->withErrors('Gegevens incorrect. Controleer uw gegevens');
+            
+            	return Redirect::route('login')->withInput(Input::only('e-mail'))->withErrors('Gegevens incorrect. Controleer uw gegevens');
+            
             }
         
         } catch ( ValidationException $e ) {
-            return Redirect::route( 'login' )->withInput(Input::only('email'))->withErrors( $e->get_errors() );
+        
+            return Redirect::route( 'login' )->withInput(Input::only('e-mail'))->withErrors( $e->get_errors() );
+        
         }
 	}
 

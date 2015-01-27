@@ -28,10 +28,11 @@ Route::group(array('namespace' => 'Kplus\Front\Controllers'), function(){
     Route::post('/register', array('as' => 'registration', 'uses' => 'CustomerController@postRegistration'));
 
     Route::get('/', array('as' => 'home', 'uses' => 'HomeController@getIndex'));
+    Route::get('/products', array('as' => 'products', 'uses' => 'ProductController@getIndex'));
 
     // Need the user to log in
     Route::group(array('before' => 'auth'), function(){
-    	Route::get('/cart', array('as' => 'cart', 'uses' => 'CartController@getIndex'));
+    	Route::get('/boodschappenlijst', array('as' => 'cart', 'uses' => 'CartController@getIndex'));
 	});
 });
 

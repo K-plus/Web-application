@@ -1,7 +1,6 @@
 {% extends 'kplus/BaseView.twig' %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{asset('packages/theme/cart.css')}}">
 {% endblock styles %}
 
 {% block content %}
@@ -27,9 +26,8 @@
 	
 	<div class="row">
 		<div class="col-lg-12">
-			{% if cartItems|length == 0 %}
-				<h2> Nog geen producten geselecteerd </h2>
-				<a class="btn btn-default" href="{{route('products')}}">Start met selecteren van producten</a>
+			{% if products|length == 0 %}
+				<h2> Geen inventaris </h2>
 			{% else %}
 				<div class="table-responsive">
                     <table class="table table-hover">
@@ -38,20 +36,26 @@
                                 <th>EAN</th>
                                 <th>Omschrijving</th>
                                 <th>Prijs (<i class="fa fa-euro"></i>)</th>
-                                <th>Hoeveelheid</th>
+                                <th>In voorraad</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-	                      	{% for cartItem in cartItems %}
+	                      	{% for product in products %}
 	                      		<tr>
-	                      			<td>{{ cartItem.product.ean }}</td>
-	                      			<td>{{ cartItem.product.name }}</td>
-	                      			<td><i class="fa fa-fw fa-euro"></i>{{ cartItem.product.price / 100 }}</td>
-	                      			<td>{{ cartItem.qty }}</td>
+	                      			<td>{{ product.ean }}</td>
+	                      			<td>{{ product.name }}</td>
+	                      			<td><i class="fa fa-fw fa-euro"></i>{{ product.price / 100 }}</td>
+	                      			<td>
+	                      				{% if product.stock > 0 %}
+	                      					<i class="fa fa-fw fa-check-circle"></i>
+	                      				{% else %}
+	                      					<i class="fa fa-fw fa-times"></i>
+										{% endif %}
+	                      			</td>
 	                      			<td>
 	                      				<button class="btn btn-sm btn-default"><i class="fa fa-fw fa-plus"></i></button>
-	                      				<button class="btn btn-sm btn-danger"><i class="fa fa-fw fa-minus"></i></button>
+	                      				<button class="btn btn-sm btn-danger"><i class="fa fa-fw fa-times"></i></button>
 	                      			</td>
 	                      		</tr>
 	                      	{% endfor %}
@@ -67,7 +71,6 @@
 		</div>
 	</div>
 </div>
-<!-- /.container-fluid -->
 {% endblock content %}
 
 {% block javascript %}

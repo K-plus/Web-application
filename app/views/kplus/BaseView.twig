@@ -21,6 +21,9 @@
 		</div>
 		{% include 'kplus/includes/FooterView.twig' %}
 		<!-- Javascript includes -->
+		<script type="text/javascript">
+			var baseUrl = "{{ baseurl }}";
+		</script>
 		<script src="{{asset('packages/jquery/jquery.min.js')}}" type="text/javascript"></script>
 		<script src="{{asset('packages/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
 		{% block javascript %}

@@ -101,10 +101,46 @@ class CartApiController extends ApiController {
                 ->first();
 
             if ( ! is_null($cartLine)) {
-                $cartLine->qty = $cartLine->qt + $qty;
+                $cartLine->qty = $cartLine->qty + $qty;
                 $cartLine->save();
 
                 return $this->respondOk('Product qty updated.');
+            }
+            else
+            {
+                return $this->respondNotFound('Product not exist on cart.');
+            }
+        }
+        else
+        {
+            return $this->respondValidationError('Parameters failed validation.');
+        }
+    }
+
+    public function substractProduct()
+    {
+        if (Input::has('id') && Input::has('qty'))
+        {
+            $user = Auth::user();
+            $cart = $user->cart;
+            $productId = Input::get('id');
+            $qty = max(1, Input::get('qty'));
+
+            // check product already exist
+            $cartLine = CartLine::where('cart_id', $cart->id)
+                ->where('product_id', $productId)
+                ->first();
+
+            if ( ! is_null($cartLine)) {
+                if($cartLine->qty == 1) {
+                    $cartLine->delete();
+                    return $this->respondOk('Product deleted from cart.');
+                } else  {
+                    $cartLine->qty = $cartLine->qty - $qty;
+                    $cartLine->save();
+
+                    return $this->respondOk('Product qty updated.');
+                }
             }
             else
             {

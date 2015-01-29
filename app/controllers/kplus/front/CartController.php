@@ -22,10 +22,10 @@ class CartController extends \BaseController
 
 		$totalPrice = 0;
 		$totalQty = 0;
-		
+
 		foreach( $cart->cartLines as $cartLine ) {
 		
-			$totalPrice += $cartLine->product->price; 
+			$totalPrice += $cartLine->product->price * $cartLine->qty; 
 		
 			$totalQty += $cartLine->qty;
 

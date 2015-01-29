@@ -10,7 +10,8 @@ Route::group(array('prefix' => 'api/v1', 'namespace' => 'Kplus\Api\Controllers')
         Route::post('cart/product/add', 'CartApiController@addProduct');
         Route::post('cart/product/update', 'CartApiController@updateProduct');
         Route::post('cart/product/delete', 'CartApiController@deleteProduct');
-
+        Route::post('cart/product/substract', 'CartApiController@substractProduct');
+        
         Route::get('product/{id}', 'ProductApiController@show');
         Route::get('product/search/{term}', 'ProductApiController@search');
 
@@ -49,4 +50,8 @@ View::composer('kplus/includes/MenuView.twig', function($view){
         $view->with('username', 'Gast');
     }
 
+});
+
+View::composer('kplus/BaseView.twig', function($view){
+    $view->with('baseurl' , Config::get('app.baseurl') );
 });

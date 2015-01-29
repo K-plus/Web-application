@@ -25,6 +25,12 @@
     <!-- /.row -->
 	
 	<div class="row">
+		<div class="col-lg-offset-6 col-lg-6">
+			<div class="form-group input-group">
+	            <input class="form-control search-box" type="text">
+	            <span class="input-group-btn"><button class="btn btn-default search-button" type="button"><i class="fa fa-search"></i></button></span>
+	        </div>
+		</div>
 		<div class="col-lg-12">
 			{% if products|length == 0 %}
 				<h2> Geen inventaris </h2>
@@ -36,7 +42,7 @@
                                 <th>EAN</th>
                                 <th>Omschrijving</th>
                                 <th>Prijs (<i class="fa fa-euro"></i>)</th>
-                                <th>In voorraad</th>
+                                <th class="text-center">In voorraad</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -46,11 +52,11 @@
 	                      			<td>{{ product.ean }}</td>
 	                      			<td>{{ product.name }}</td>
 	                      			<td><i class="fa fa-fw fa-euro"></i>{{ product.price / 100 }}</td>
-	                      			<td>
+	                      			<td class='text-center'>
 	                      				{% if product.stock > 0 %}
-	                      					<i class="fa fa-fw fa-check-circle"></i>
+	                      					<i class="fa fa-fw fa-check-circle" style="color: green !important;"></i>
 	                      				{% else %}
-	                      					<i class="fa fa-fw fa-times"></i>
+	                      					<i class="fa fa-fw fa-times" style="color: red !important;"></i>
 										{% endif %}
 	                      			</td>
 	                      			<td>
@@ -61,6 +67,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="text-center">
+                	{{ products.links|raw }}
+                </div>
 			{% endif %}
 		</div>
 	</div>
@@ -68,4 +77,5 @@
 {% endblock content %}
 
 {% block javascript %}
+<script type="text/javascript" src="{{asset('packages/js/products.js')}}"></script>
 {% endblock javascript %}

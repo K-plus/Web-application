@@ -35,7 +35,7 @@ return array(
 	*/
 
 	'url' => 'http://localhost',
-
+	'baseurl' => 'http://kplus.santjuh.nl',
 	/*
 	|--------------------------------------------------------------------------
 	| Application Timezone

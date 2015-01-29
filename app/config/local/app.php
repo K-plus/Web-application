@@ -15,4 +15,6 @@ return array(
 
 	'debug' => true,
 
+
+	'baseurl' => 'http://kplus.app:8000',
 );

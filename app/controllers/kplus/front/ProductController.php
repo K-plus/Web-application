@@ -15,7 +15,7 @@ class ProductController extends \BaseController
 		$view->pageTitle 	= 'Producten';
 		$view->subTitle 	= 'Doorzoek alle producten';
 
-		$products = Product::all();
+		$products = Product::paginate(10);
 
 		$view->products 	= $products;
 		return $view;

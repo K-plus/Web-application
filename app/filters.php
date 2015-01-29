@@ -48,6 +48,13 @@ Route::filter('auth', function()
 	}
 });
 
+Route::filter('is_admin', function(){
+	if(Session::has('is_admin')) {
+		if( Crypt::decrypt(Session::get('is_admin')) != 1 ) {
+			return Redirect::route('home');
+		}
+	}
+});
 
 Route::filter('auth.basic', function()
 {

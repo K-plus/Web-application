@@ -1,6 +1,7 @@
 <?php namespace Kplus\Api\Controllers;
 
 use Auth;
+use Input;
 use Kplus\Models\CartLine;
 
 /**
@@ -18,7 +19,7 @@ class CartApiController extends ApiController {
             $totalItems = 0;
             $totalPrice = 0;
             $cartLines = $cart->cartLines;
-            
+
             foreach($cartLines as $c => $cartLine){
                 
                 $lines[$c]['id'] = $cartLine->id;

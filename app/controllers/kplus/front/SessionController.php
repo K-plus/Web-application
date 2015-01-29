@@ -49,8 +49,9 @@ class SessionController extends \BaseController
             $validate_data = $this->_validator->validate( $input );
             
             if( Auth::attempt(array('email' => $input['e-mail'], 'password' => $input['wachtwoord'])) ) {
-            
+            	
             	Session::put('username', Crypt::encrypt($input['e-mail']));
+        	    Session::put('is_admin', Crypt::encrypt(Auth::user()->is_admin));
             	return Redirect::intended();
             
             } else {

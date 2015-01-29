@@ -14,10 +14,10 @@
             </h1>
             <ol class="breadcrumb">
                 <li>
-                    <i class="fa fa-dashboard"></i>  <a href="{{route('home')}}"> Overzicht</a>
+                    <i class="fa fa-fw fa-home"></i>  <a href="{{route('home')}}"> Overzicht</a>
                 </li>
                 <li class="active">
-                    <i class="fa fa-check-square"></i> {{pageTitle}}
+                    <i class="fa fa-fw fa-shopping-cart"></i> {{pageTitle}}
                 </li>
             </ol>
         </div>
@@ -55,15 +55,9 @@
 	                      			</td>
 	                      			<td>
 	                      				<button class="btn btn-sm btn-default"><i class="fa fa-fw fa-plus"></i></button>
-	                      				<button class="btn btn-sm btn-danger"><i class="fa fa-fw fa-times"></i></button>
 	                      			</td>
 	                      		</tr>
 	                      	{% endfor %}
-	                      	<tr class="warning">
-                                <td colspan="2">Totalen</td>
-                                <td><i class="fa fa-fw fa-euro"></i>{{totalPrice / 100}}</td>
-                                <td colspan="2">{{totalQty}}</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>

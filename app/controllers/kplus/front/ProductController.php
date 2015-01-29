@@ -10,37 +10,14 @@ class ProductController extends \BaseController
 	
 	public function getIndex()
 	{
-		$cart = Auth::user()->cart;
+		$view = View::make('kplus.product.IndexView');
+		$view->title 		= 'Producten';
+		$view->pageTitle 	= 'Producten';
+		$view->subTitle 	= 'Doorzoek alle producten';
 
-		$user = Auth::user();
+		$products = Product::all();
 
-		if( is_null($cart) ) {
-			$cart = new Cart();
-			$cart->user_id = $user->id; 
-			$cart->save();
-			$cart = $cart;
-		}
-
-		$totalPrice = 0;
-		$totalQty = 0;
-		
-		foreach( $cart->cartLines as $cartLine ) {
-		
-			$totalPrice += $cartLine->product->price; 
-		
-			$totalQty += $cartLine->qty;
-
-			$cartLine->product->toArray(); 
-		}
-
-		$view = View::make('kplus.cart.IndexView');
-		$view->title 		= 'Boodschappenlijst';
-		$view->cartItems 	= $cart->cartLines;
-		$view->totalPrice	= $totalPrice; 
-		$view->totalQty 	= $totalQty;
-		$view->pageTitle 	= 'Boodschappenlijst';
-		$view->subTitle 	= 'Artikelen op uw lijst';
-
+		$view->products 	= $products;
 		return $view;
 	}
 }

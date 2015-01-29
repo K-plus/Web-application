@@ -144,14 +144,16 @@
             </li>
 
             <!-- Products --> 
-            <li class="{{ Route.is() ? 'active' : '' }}">
-                <a href="tables.html"><i class="fa fa-fw fa-shopping-cart"></i> Producten</a>
-            </li>
-
-           {#  <li>
-                <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
+            <li class="{{ Route.is('products') ? 'active' : '' }}">
+                <a href="{{ route('products')}}"><i class="fa fa-fw fa-shopping-cart"></i> Producten</a>
             </li>
             
+            {% if is_admin == 1 %}
+                <li class="{{ Route.is('stockmanagement') }}">
+                    <a href="{{ route('stockmanagement') }}"><i class="fa fa-fw fa-list-alt"></i> Voorraadbeheer</i></a>
+                </li>
+            {% endif %}
+           {# 
             <li>
                 <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
             </li>

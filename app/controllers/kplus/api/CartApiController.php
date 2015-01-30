@@ -74,7 +74,7 @@ class CartApiController extends ApiController {
             }
             else
             {
-                $cartLine->qty = $cartLine->qt + $qty;
+                $cartLine->qty = $cartLine->qty + $qty;
                 $cartLine->save();
             }
 

@@ -3,7 +3,8 @@
 Route::group(array('prefix' => 'api/v1', 'namespace' => 'Kplus\Api\Controllers'), function()
 {
     Route::post('customer/login', 'CustomerApiController@login');
-
+    Route::get('product/search/{term}', 'ProductApiController@search');
+    
     Route::group(array('before' => 'auth.basic'), function()
     {
         Route::get('cart', 'CartApiController@index');
@@ -11,9 +12,9 @@ Route::group(array('prefix' => 'api/v1', 'namespace' => 'Kplus\Api\Controllers')
         Route::post('cart/product/update', 'CartApiController@updateProduct');
         Route::post('cart/product/delete', 'CartApiController@deleteProduct');
         Route::post('cart/product/substract', 'CartApiController@substractProduct');
-        
+
         Route::get('product/{id}', 'ProductApiController@show');
-        Route::get('product/search/{term}', 'ProductApiController@search');
+        
 
         Route::post('order/add', 'OrderApiController@createOrder');
     });
@@ -54,4 +55,9 @@ View::composer('kplus/includes/MenuView.twig', function($view){
 
 View::composer('kplus/BaseView.twig', function($view){
     $view->with('baseurl' , Config::get('app.baseurl') );
+    if(Session::has('username')){
+        $view->with('username', Crypt::decrypt(Session::get('username')) );
+    } else {
+        $view->with('username', 'Gast');
+    }
 });

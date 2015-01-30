@@ -34,11 +34,22 @@ class ProductApiController extends ApiController {
      */
     public function search($term)
     {
-        $product = Product::where('name', 'LIKE', '%'.$term.'%')->first();
-        if( ! is_null($product))
+
+        $products = Product::where('name', 'LIKE', '%'.$term.'%')
+                    ->orWhere('ean', 'LIKE', '%'.$term.'%')
+                    ->orWhere('price', 'LIKE', '%'.$term.'%')
+                    ->get();
+
+        if( count($products) != 0 )
         {
+            $dataArray = array();
+
+            foreach($products as $product) {
+                $dataArray[] = $this->transformProduct($product);
+            }
+            
             return $this->respond([
-                'data' => $this->transformProduct($product)
+                'data'=> $dataArray
             ]);
         }
         else

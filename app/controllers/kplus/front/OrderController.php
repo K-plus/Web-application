@@ -4,7 +4,7 @@ class OrderController extends \BaseController
 {
 	public function getIndex()
 	{
-		$view = View::make('kplus.orders.IndexView');
+		$view = Viebew::make('kplus.orders.IndexView');
 
 		return $view;
 	}

@@ -101,7 +101,7 @@ class CartApiController extends ApiController {
                 ->first();
 
             if ( ! is_null($cartLine)) {
-                $cartLine->qty = $cartLine->qty + $qty;
+                $cartLine->qty =$qty;
                 $cartLine->save();
 
                 return $this->respondOk('Product qty updated.');

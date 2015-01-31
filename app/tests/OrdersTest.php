@@ -30,7 +30,7 @@ class OrdersTest extends ApiTester {
 
         Auth::loginUsingId(1);
 
-        $this->postJson('api/v1/order/add');
+        $this->postJson('api/v1/order/add'); // how to add parameters here? needs to have {products: [{"id": 1, "quantity": 20}]}
 
         $this->assertResponseOk();
     }

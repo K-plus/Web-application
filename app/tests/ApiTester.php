@@ -79,7 +79,7 @@ abstract class ApiTester extends TestCase {
      * @param $uri
      * @return mixed
      */
-    protected function postJson($uri, $params)
+    protected function postJson($uri, $params = [])
     {
         return json_decode($this->call('POST', $uri, $params)->getContent());
     }

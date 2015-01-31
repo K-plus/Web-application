@@ -33,6 +33,7 @@ abstract class ApiTester extends TestCase {
         parent::setUp();
 
         $this->app['artisan']->call('migrate');
+        $this->app['router']->enableFilters();
     }
 
     /**
@@ -72,6 +73,15 @@ abstract class ApiTester extends TestCase {
     protected function getJson($uri)
     {
         return json_decode($this->call('GET', $uri)->getContent());
+    }
+
+    /**
+     * @param $uri
+     * @return mixed
+     */
+    protected function postJson($uri, $params)
+    {
+        return json_decode($this->call('POST', $uri, $params)->getContent());
     }
 
     /**

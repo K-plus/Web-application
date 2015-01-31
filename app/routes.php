@@ -4,6 +4,7 @@ Route::group(array('prefix' => 'api/v1', 'namespace' => 'Kplus\Api\Controllers')
 {
     Route::post('customer/login', 'CustomerApiController@login');
     Route::get('product/search/{term}', 'ProductApiController@search');
+    Route::get('product/{id}', 'ProductApiController@show');
     
     Route::group(array('before' => 'auth.basic'), function()
     {
@@ -12,9 +13,6 @@ Route::group(array('prefix' => 'api/v1', 'namespace' => 'Kplus\Api\Controllers')
         Route::post('cart/product/update', 'CartApiController@updateProduct');
         Route::post('cart/product/delete', 'CartApiController@deleteProduct');
         Route::post('cart/product/substract', 'CartApiController@substractProduct');
-
-        Route::get('product/{id}', 'ProductApiController@show');
-        
 
         Route::post('order/add', 'OrderApiController@createOrder');
     });

@@ -5,7 +5,8 @@ Route::group(array('prefix' => 'api/v1', 'namespace' => 'Kplus\Api\Controllers')
     Route::post('customer/login', 'CustomerApiController@login');
     Route::get('product/search/{term}', 'ProductApiController@search');
     Route::get('product/{id}', 'ProductApiController@show');
-    
+    Route::get('ads/store/{id}', 'AdvertisementController@getAdvertisement');
+
     Route::group(array('before' => 'auth.basic'), function()
     {
         Route::get('cart', 'CartApiController@index');

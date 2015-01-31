@@ -34,6 +34,7 @@ Route::group(array('namespace' => 'Kplus\Front\Controllers'), function(){
     // Need the user to log in
     Route::group(array('before' => 'auth'), function(){
     	Route::get('/boodschappenlijst', array('as' => 'cart', 'uses' => 'CartController@getIndex'));
+        Route::get('/facturen', array('as' => 'orders', 'uses' => 'OrderController@getIndex'));
 	});
 
     // The admin needs to be logged in

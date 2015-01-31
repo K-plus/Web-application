@@ -3,7 +3,7 @@
 class Cart extends \Eloquent {
 
     protected $table = 'carts';
-	protected $fillable = [];
+	protected $fillable = ['user_id'];
 
     public function user()
     {

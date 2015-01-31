@@ -19,6 +19,7 @@ class OrderApiController extends ApiController {
         $order = new Order;
         $order->user_id = $user->id;
         $order->paid = 1;
+        $order->total_price = 0; // update below
         $order->save();
 
         $orderId = $order->id;

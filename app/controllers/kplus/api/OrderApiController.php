@@ -4,6 +4,7 @@ use Auth;
 use Kplus\Models\Order;
 use Kplus\Models\OrderLine;
 use Kplus\Models\CartLine;
+use Kplus\Models\Product;
 
 class OrderApiController extends ApiController {
 
@@ -36,6 +37,11 @@ class OrderApiController extends ApiController {
                 $orderLine->unit_price = $cartLine->product->price;
                 $orderLine->subtotal = ($cartLine->qty * $cartLine->product->price);
                 $orderLine->save();
+
+                // update stock
+                $product = Product::find($cartLine->product->id);
+                $product->stock = $product->stock - $cartLine->qty;
+                $product->save();
 
                 // remove cart line
                 $cartLine = CartLine::find($cartLine->id);

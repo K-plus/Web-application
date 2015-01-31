@@ -8,7 +8,11 @@ use Kplus\Models\Product;
 
 class OrderApiController extends ApiController {
 
-    public function createOrder()
+    /**
+     * processOrder processes the order that comes from the store and stores the order online for the customer to see
+     * @return mixed
+     */
+    public function processOrder()
     {
         // read cart
         $user = Auth::user();
@@ -46,8 +50,15 @@ class OrderApiController extends ApiController {
                 $orderLine->save();
 
                 // update stock
-                $productObject->stock = $productObject->stock - $product['quantity'];
-                $productObject->save();
+                if($productObject->stock >= $product['quantity']){
+                    $productObject->stock = $productObject->stock - $product['quantity'];
+                    $productObject->save();
+                } else {
+                    // shit sold out yo
+                    $productObject->stock = 0;
+                    $productObject->save();
+                }
+                
 
                 foreach($cartLines as $cartLine){
                     if($cartLine->product_id == $product['id']){
@@ -71,7 +82,7 @@ class OrderApiController extends ApiController {
         }
         else
         {
-            return $this->respondValidationError('Cart has no cart lines.');
+            return $this->respondValidationError('U wanna pay for nothing? Please do.');
         }
     }
 

@@ -17,7 +17,7 @@ class OrderApiController extends ApiController {
 
         $productsPaid = Input::get('products');
         
-        // // create order
+        // create order
         // $order = new Order;
         // $order->user_id = $user->id;
         // $order->paid = 1;
@@ -26,38 +26,40 @@ class OrderApiController extends ApiController {
 
         // $orderId = $order->id;
 
-        // // insert order lines
-        // if(count($cartLines))
-        // {
-        //     $totalPrice = 0;
+        // insert order lines
+        if(count($productsPaid))
+        {
+            $totalPrice = 0;
 
-        //     foreach($cartLines as $c => $cartLine){
-        //         $orderLine = new OrderLine;
-        //         $orderLine->order_id = $orderId;
-        //         $orderLine->ean = $cartLine->product->ean;
-        //         $orderLine->product_name = $cartLine->product->name;
-        //         $orderLine->qty = $cartLine->qty;
-        //         $orderLine->unit_price = $cartLine->product->price;
-        //         $orderLine->subtotal = ($cartLine->qty * $cartLine->product->price);
-        //         $orderLine->save();
+            foreach($productsPaid as $product){
+                var_dump($product); 
+                // $orderLine = new OrderLine;
 
-        //         // update stock
-        //         $product = Product::find($cartLine->product->id);
-        //         $product->stock = $product->stock - $cartLine->qty;
-        //         $product->save();
+                // $orderLine->order_id = $orderId;
+                // $orderLine->ean = $cartLine->product->ean;
+                // $orderLine->product_name = $cartLine->product->name;
+                // $orderLine->qty = $cartLine->qty;
+                // $orderLine->unit_price = $cartLine->product->price;
+                // $orderLine->subtotal = ($cartLine->qty * $cartLine->product->price);
+                // $orderLine->save();
 
-        //         // remove cart line
-        //         $cartLine = CartLine::find($cartLine->id);
-        //         $cartLine->delete();
+                // // update stock
+                // $product = Product::find($cartLine->product->id);
+                // $product->stock = $product->stock - $cartLine->qty;
+                // $product->save();
 
-        //         $totalPrice += $orderLine->subtotal;
-        //     }
+                // // remove cart line
+                // $cartLine = CartLine::find($cartLine->id);
+                // $cartLine->delete();
 
-        //     $order = Order::find($orderId);
-        //     $order->total_price = $totalPrice;
-        //     $order->save();
+                // $totalPrice += $orderLine->subtotal;
+            }
+        }
+            // $order = Order::find($orderId);
+            // $order->total_price = $totalPrice;
+            // $order->save();
 
-            return $this->respondOk($productsPaid);
+            // return $this->respondOk($productsPaid);
         // }
         // else
         // {

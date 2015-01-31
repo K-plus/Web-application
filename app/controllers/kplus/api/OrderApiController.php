@@ -15,56 +15,64 @@ class OrderApiController extends ApiController {
         $cart = $user->cart;
         $cartLines = $cart->cartLines;
 
-        $productsPaid = Input::get('products');
+        $products = json_decode(Input::get('products'), true);
         
         // create order
-        // $order = new Order;
-        // $order->user_id = $user->id;
-        // $order->paid = 1;
-        // $order->total_price = 0; // update below
-        // $order->save();
+        $order = new Order;
+        $order->user_id = $user->id;
+        $order->paid = 1;
+        $order->total_price = 0; // update below
+        $order->save();
 
-        // $orderId = $order->id;
+        $orderId = $order->id;
 
         // insert order lines
-        if(count($productsPaid))
+        if(count($products))
         {
             $totalPrice = 0;
 
-            foreach($productsPaid as $product){
-                var_dump($product); 
-                // $orderLine = new OrderLine;
+            foreach($products as $product){
+                
+                $productObject = Product::findOrFail($product['id']);
 
-                // $orderLine->order_id = $orderId;
-                // $orderLine->ean = $cartLine->product->ean;
-                // $orderLine->product_name = $cartLine->product->name;
-                // $orderLine->qty = $cartLine->qty;
-                // $orderLine->unit_price = $cartLine->product->price;
-                // $orderLine->subtotal = ($cartLine->qty * $cartLine->product->price);
-                // $orderLine->save();
+                $orderLine = new OrderLine;
 
-                // // update stock
-                // $product = Product::find($cartLine->product->id);
-                // $product->stock = $product->stock - $cartLine->qty;
-                // $product->save();
+                $orderLine->order_id = $orderId;
+                $orderLine->ean = $productObject->ean;
+                $orderLine->product_name = $productObject->name;
+                $orderLine->qty = $product['quantity'];
+                $orderLine->unit_price = $productObject->price;
+                $orderLine->subtotal = ($product['quantity'] * $productObject->price);
+                $orderLine->save();
 
-                // // remove cart line
-                // $cartLine = CartLine::find($cartLine->id);
-                // $cartLine->delete();
+                // update stock
+                $productObject->stock = $productObject->stock - $product['quantity'];
+                $productObject->save();
 
-                // $totalPrice += $orderLine->subtotal;
+                foreach($cartLines as $cartLine){
+                    if($cartLine->product_id == $product['id']){
+                        if($cartLine->qty <= $product['quantity']){
+                            $cartLine->delete();
+                        } else {
+                            $cartLine->qty -= $product['quantity'];
+                            $cartLine->save();
+                        }
+                    }
+                }
+
+                $totalPrice += $orderLine->subtotal;
             }
-        }
-            // $order = Order::find($orderId);
-            // $order->total_price = $totalPrice;
-            // $order->save();
 
-            // return $this->respondOk($productsPaid);
-        // }
-        // else
-        // {
-        //     return $this->respondValidationError('Cart has no cart lines.');
-        // }
+            $order = Order::find($orderId);
+            $order->total_price = $totalPrice;
+            $order->save();
+
+            return $this->respondOk("Kappa");
+        }
+        else
+        {
+            return $this->respondValidationError('Cart has no cart lines.');
+        }
     }
 
 }

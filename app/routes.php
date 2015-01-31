@@ -53,6 +53,7 @@ View::composer('kplus/includes/MenuView.twig', function($view){
 
 View::composer('kplus/BaseView.twig', function($view){
     $view->with('baseurl' , Config::get('app.baseurl') );
+    $view->with('SITE', Config::get('app.constants.site') );
     if(Session::has('username')){
         $view->with('username', Crypt::decrypt(Session::get('username')) );
     } else {

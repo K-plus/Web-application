@@ -4,10 +4,7 @@ return array(
 
 	'constants' => array(
 
-		// Local
-		define('VERSION', 'v0.1'),
-	    define('SITE', 'Kplus'),
-	    define('CURRENTYEAR', date('Y')),
+	    'site' => 'Kplus',
 	),
 	
 	/*

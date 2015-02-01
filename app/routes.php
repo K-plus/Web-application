@@ -14,11 +14,15 @@ Route::group(array('prefix' => 'api/v1', 'namespace' => 'Kplus\Api\Controllers')
         Route::post('cart/product/update', 'CartApiController@updateProduct');
         Route::post('cart/product/delete', 'CartApiController@deleteProduct');
         Route::post('cart/product/substract', 'CartApiController@substractProduct');
-
+        
         Route::post('order/add', 'OrderApiController@processOrder');
-        Route::post('product/create', 'ProductApiController@create');
-        Route::post('product/update/{id}', 'ProductApiController@update');
-        Route::get('product/delete/{id}', 'ProductApiController@delete');
+
+        Route::group(array('before'=> 'is_admin', function(){
+            Route::post('product/create', 'ProductApiController@create');
+            Route::post('product/update/{id}', 'ProductApiController@update');
+            Route::get('product/delete/{id}', 'ProductApiController@delete');
+        });
+       
     });
 });
 

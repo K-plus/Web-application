@@ -43,6 +43,8 @@ Route::group(array('namespace' => 'Kplus\Front\Controllers'), function(){
     	Route::get('/boodschappenlijst', array('as' => 'cart', 'uses' => 'CartController@getIndex'));
         Route::get('/bonnen', array('as' => 'orders', 'uses' => 'OrderController@getIndex'));
         Route::get('/bonnen/{id}', 'OrderController@show');
+        Route::get('/profiel', array('as' => 'profile', 'uses'=>'CustomerController@getProfile'));
+        Route::post('/profiel/bijwerken', array('as' => 'profile.update', 'uses' => 'CustomerController@update'));
 	});
 
     // The admin needs to be logged in

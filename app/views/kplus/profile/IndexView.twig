@@ -1,0 +1,92 @@
+{% extends 'kplus/BaseView.twig' %}
+
+{% block styles %}
+{% endblock styles %}
+
+{% block content %}
+	  <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+           	        {{ pageTitle }}
+                    <small>{{ subTitle }}</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>  <a href="{{route('home')}}"> Overzicht</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-user-plus"></i> {{ pageTitle }}
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+		
+		<div class="row">
+            <!-- Form -->
+			<div class="col-lg-offset-2 col-lg-8">
+				<div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"> {{ pageTitle }} </h3>
+                    </div>
+                    <div class="panel-body">
+                        {% if not errors is empty %} 
+                            {% for error in errors.all %}
+                               {# {{dump(error)}} #}
+                               	<div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  {{error}}
+								</div>
+                            {% endfor %}
+                        {% endif %}
+                        <form method="POST" action="{{ route('profile.update')}}">
+                            {{ Form.token()|raw }}
+                            <!-- Form [First name] -->
+                            <div class="form-group col-md-6">
+                                <label>Voornaam</label>
+                                <input class="form-control" name="voornaam" value="{{Input.old('voornaam') ? Input.old('voornaam') : name|first}}">
+                            </div>
+							
+							<!-- Form [Last name] -->
+							<div class="form-group col-md-6">
+                                <label>Achternaam</label>
+                                <input class="form-control" name="achternaam" value="{{Input.old('achternaam') ? Input.old('achternaam') : name|last}}">
+                                <p class="help-block">Tussenvoegsels mogen hier ook bij.</p>
+                            </div>
+						
+                            <!-- Form [Email] -->
+                            <div class="form-group col-md-12">
+                            <label>E-email adres</label>
+                                <input type="text" class="form-control" name="e-mail" value="{{Input.old('e-mail') ? Input.old('e-mail') : user.email}}">
+                            </div>
+                            
+                            <!-- Form [Password] -->
+                            <div class="form-group col-md-6">
+                            	<label>Wachtwoord</label>
+                                <input type="password" class="form-control" name="wachtwoord">
+                            </div>
+                            <!-- Form [Password2] -->
+                            <div class="form-group col-md-6">
+                            	<label>Wachtwoord herhalen</label>
+                                <input type="password" class="form-control" name="wachtwoord-herhalen">
+                                <p class="help-block">Wachtwoorden moeten overeenkomen</p>
+                            </div>
+                            
+                            <!-- Form [Submit-Button] -->
+                            <div class="form-group col-md-12">
+	                            <button type="submit" class="btn btn-primary">Wijzigen</button>
+                        	</div>
+                        </form>     
+                    </div>
+                </div>
+			</div>
+            <!-- End Form -->
+		</div>
+    </div>
+{% endblock content %}
+
+{% block javascript %}
+
+{% endblock javascript %}

@@ -1,0 +1,71 @@
+{% extends 'kplus/BaseView.twig' %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{asset('packages/theme/cart.css')}}">
+{% endblock styles %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+       			{{pageTitle}}
+       			<small>{{subTitle}}</small>
+       			<i class="fa fa-fw fa-spinner fa-pulse page-loader" style="display: none;"></i>
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>  <a href="{{route('home')}}"> Overzicht</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-file-text-o"></i> {{pageTitle}}
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+	
+	<div class="row" id="order-view">
+		<div id="order-row">
+			<div class="col-lg-12">
+				{% if orders|length == 0 %}
+					<h2> Nog geen bonnen aanwezig </h2>
+				{% else %}
+					<div class="table-responsive">
+	                    <table class="table table-hover order-table">
+	                        <thead>
+	                            <tr>
+	                                <th>Bonnummer</th>
+	                                <th>Totaalbedrag</th>
+	                                <th class="text-center">Betaald</th>
+	                                <th class="text-center">Datum</th>
+	                                <th></th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+		                      	{% for order in orders %}
+		                      		<tr data-order-id="{{order.id}}">
+		                      			<td>{{ order.id }}</td>
+		                      			<td><i class="fa fa-fw fa-euro"></i>{{ order.total_price / 100 }}</td>
+		                      			<td class="text-center">{{ (( order.paid == 1) ? '<i class="fa fa-fw fa-check-circle" style="color: green !important;"></i>': '<i class="fa fa-fw fa-times" style="color: red !important;"></i>' )}}</td>
+		                      			<td class="text-center">{{order.created_at|date("d-m-Y")}}</td>
+		                      			<td>
+		                      				<button class="btn btn-sm btn-view-order btn-info"><i class="fa fa-fw fa-info-circle"></i></button>
+		                      			</td>
+		                      		</tr>
+		                      	{% endfor %}
+	                        </tbody>
+	                    </table>
+	                </div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /.container-fluid -->
+{% endblock content %}
+
+{% block javascript %}
+<script src="{{asset('packages/js/order.js')}}" type="text/javascript"></script>
+{% endblock javascript %}

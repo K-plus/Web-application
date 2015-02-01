@@ -154,8 +154,8 @@
                 </li>
             {% endif %}
 
-            <li>
-                <a href="{{route('orders')}}"><i class="fa fa-fw fa-money"></i> Facturen</a>
+            <li class="{{ Route.is('orders') ? 'active' : ''}}">
+                <a href="{{route('orders')}}"><i class="fa fa-fw fa-money"></i> Bonnen</a>
             </li>
             {#
             <li>

@@ -30,4 +30,9 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
         return $this->hasOne('Kplus\Models\Cart');
     }
 
+    public function orders()
+    {
+    	return $this->hasMany('Kplus\Models\Order');
+    }
+
 }

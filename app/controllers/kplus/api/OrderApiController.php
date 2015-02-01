@@ -1,6 +1,6 @@
 <?php namespace Kplus\Api\Controllers;
 
-use Auth, Input;
+use Auth, Input, Request;
 use Kplus\Models\Order;
 use Kplus\Models\OrderLine;
 use Kplus\Models\CartLine;
@@ -19,8 +19,13 @@ class OrderApiController extends ApiController {
         $cart = $user->cart;
         $cartLines = $cart->cartLines;
 
-        $products = Input::get('products');
-        ;
+        $products = Input::get('products');;
+
+        if( is_null($products)){
+            $request = Request::instance();
+            $content = json_decode($request->getContent(), true);
+            $products = $content['products'];
+        }
 
         // create order
         $order = new Order;

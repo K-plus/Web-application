@@ -19,8 +19,9 @@ class OrderApiController extends ApiController {
         $cart = $user->cart;
         $cartLines = $cart->cartLines;
 
-        $products = json_decode(Input::get('products'), true);
-        
+        $products = Input::get('products');
+        ;
+
         // create order
         $order = new Order;
         $order->user_id = $user->id;

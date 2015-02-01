@@ -3,7 +3,7 @@
 class OrdersTest extends ApiTester {
 
     /** @test */
-    public function it_deletes_a_product_to_cart()
+    public function it_adds_an_order()
     {
         Kplus\Models\Product::create([
             'name' => 'Half stokbrood',
@@ -30,7 +30,16 @@ class OrdersTest extends ApiTester {
 
         Auth::loginUsingId(1);
 
-        $this->postJson('api/v1/order/add', json_encode('{products: [{"id": 1, "quantity": 20}]}') ); // how to add parameters here? needs to have {products: [{"id": 1, "quantity": 20}]}
+        $data = [
+            'products' => [
+                [
+                    'id' => 1,
+                    'quantity' => 20
+                ]
+            ]
+        ];
+
+        $this->postJson('api/v1/order/add', $data);
 
         $this->assertResponseOk();
     }

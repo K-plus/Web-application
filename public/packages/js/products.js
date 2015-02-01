@@ -70,6 +70,8 @@ $.fn.enterKey = function (fnc) {
 			$('.loading-icon').hide();
 			buttonWatchers();
 		});
+	} else {
+		buttonWatchers();
 	}
 
 	$('.search-box').keyup(function(){

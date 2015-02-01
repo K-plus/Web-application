@@ -149,7 +149,7 @@
             </li>
             
             {% if is_admin == 1 %}
-                <li class="{{ Route.is('stockmanagement') }}">
+                <li class="{{ Route.is('stockmanagement') ? 'active' : ''}}">
                     <a href="{{ route('stockmanagement') }}"><i class="fa fa-fw fa-list-alt"></i> Voorraadbeheer</i></a>
                 </li>
             {% endif %}

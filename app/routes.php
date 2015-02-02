@@ -32,7 +32,7 @@ Route::group(array('namespace' => 'Kplus\Front\Controllers'), function(){
 	Route::get('/login', array('as' => 'login', 'uses' => 'SessionController@getIndex'));
     Route::post('/authenticate', array('as' => 'authenticate', 'uses' => 'SessionController@postLogin'));
     
-    Route::get('/registreer', array('as' => 'registration', 'uses' => 'CustomerController@getRegistrationIndex'));
+    Route::get('/registreer', array('as' => 'registreer', 'uses' => 'CustomerController@getRegistrationIndex'));
     Route::post('/register', array('as' => 'registration', 'uses' => 'CustomerController@postRegistration'));
 
     Route::get('/', array('as' => 'home', 'uses' => 'HomeController@getIndex'));
